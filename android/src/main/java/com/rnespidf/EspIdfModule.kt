@@ -294,7 +294,9 @@ class EspIdfModule(reactContext: ReactApplicationContext) :
   fun onDeviceEvent(event: DeviceConnectionEvent) {
     val params = Arguments.createMap()
     params.putInt("status", event.eventType.toInt())
-    params.putString("data", event.data.toString() )
+    if (event.data != null) {
+      params.putString("data", event.data.toString() )
+    }
     Log.d(TAG, "ON Device Prov Event RECEIVED : " + event.eventType)
     sendEvent(EVENT_CONNECT_DEVICE, params)
   }
